@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//Dtd HTML 4.01 Transitional//EN">
 <html lang="ja-JP">
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -6,89 +6,192 @@
 <title>色の名前辞書計画</title>
 <link rel="stylesheet" href="./style.css" type="text/css">
 <link rel="stylesheet" href="./tab.css" type="text/css">
+<link rel="stylesheet" href="./oto.css" type="text/css">
 <link rel="stylesheet" href="./slider.css" type="text/css">
+<script src="yui/yahoo.js" type="text/javascript"></script>
+<script src="yui/dom.js" type="text/javascript"></script>
+
+<script type="text/javascript"><!--
+
+var yomi,kaki,Rval,Gval,Bval;
+var num;
+
+// ロード時にファイル読み込み
+window.onload = function () {
+  dispOto();
+}
+
+window.addEventListener('DOMContentLoaded', function(){
+  const xhr = new XMLHttpRequest();
+  xhr.open('get', './c_name.txt');
+  xhr.send();
+  xhr.onreadystatechange = function() {
+    if( xhr.readyState === 4 && xhr.status === 200) {
+      readColorData(this.responseText);
+    }
+  };
+});
+
+function readColorData(tabText)
+{
+	yomi = new Array(12000);
+	kaki = new Array(12000);
+	Rval = new Array(12000);
+	Gval = new Array(12000);
+	Bval = new Array(12000);
+
+	var LF = String.fromCharCode(10); // 改行コード (LF)
+	var TAB = String.fromCharCode(9); // タブコード
+	lineData = tabText.split(LF);
+	num = lineData.length;
+	for (var i=0; i<lineData.length; i++) {
+		wCount = lineData[i].split(TAB);
+		yomi[i] = wCount[0];
+		kaki[i] = wCount[1];
+		Rval[i] = parseInt(wCount[2],16);
+		Gval[i] = parseInt(wCount[3],16);
+		Bval[i] = parseInt(wCount[4],16);
+	}
+}
+
+function dispOto()
+{
+	var resTxt;
+  resText = "<table class=\"oto\" cellpadding=\"12\">";
+  resText += "<tr>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('わ','^わ')\">わ</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('ら','^ら')\">ら</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('や','^や')\">や</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('ま','^ま')\">ま</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('は','^は|^ば|^ぱ')\">は</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('な','^な')\">な</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('た','^た|^だ')\">た</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('さ','^さ|^ざ')\">さ</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('か','^か|^が')\">か</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('あ','^あ')\">あ</td>";
+  resText += "</tr>";
+  resText += "<tr>";
+  resText += "<td class=\"oto\">　</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('り','^り')\">り</td>";
+  resText += "<td class=\"oto\">　</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('み','^み')\">み</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('ひ','^ひ|^び|^ぴ')\">ひ</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('に','^に')\">に</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('ち','^ち|^ぢ')\">ち</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('し','^し|^じ')\">し</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('き','^き|^ぎ')\">き</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('い','^い')\">い</td>";
+  resText += "</tr>";
+  resText += "<tr>";
+  resText += "<td class=\"oto\">　</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('る','^る')\">る</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('ゆ','^ゆ')\">ゆ</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('む','^む')\">む</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('ふ','^ふ|^ぶ|^ぷ')\">ふ</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('ぬ','^ぬ')\">ぬ</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('つ','^つ|^づ')\">つ</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('す','^す|^ず')\">す</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('く','^く|^ぐ')\">く</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('う','^う')\">う</td>";
+  resText += "</tr>";
+  resText += "<tr>";
+  resText += "<td class=\"oto\">　</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('れ','^れ')\">れ</td>";
+  resText += "<td class=\"oto\">　</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('め','^め')\">め</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('へ','^へ|^べ|^ぺ')\">へ</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('ね','^ね')\">ね</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('て','^て|^で')\">て</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('せ','^せ|^ぜ')\">せ</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('け','^け|^げ')\">け</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('え','^え')\">え</td>";
+  resText += "</tr>";
+  resText += "<tr>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('を','^を')\">を</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('ろ','^ろ')\">ろ</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('よ','^よ')\">よ</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('も','^も')\">も</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('ほ','^ほ|^ぼ|^ぽ')\">ほ</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('の','^の')\">の</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('と','^と|^ど')\">と</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('そ','^そ|^ぞ')\">そ</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('こ','^こ|^ご')\">こ</td>";
+  resText += "<td class=\"oto\" onclick=\"otoClick('お','^お')\">お</td>";
+  resText += "</tr>";
+  resText += "</table>";
+
+  YAHOO.util.Dom.get("oto_result").innerHTML = resText;
+}
+
+function otoClick(sMidasi, sRex)
+{
+  var resText;
+  resText = "<h1>" + sMidasi + "で始まる色の名前" + "</h1><br />";
+  resText += "<table>";
+  resText += "<tr><th>色</th><th>名称</th><th>めいしょう</th>";
+  resText += "<th>R</th><th>G</th><th>B</th><th>#code</th></tr>";
+  for(i=0; i<num; i++) {
+    if(yomi[i].search(sRex)==0) {
+      resText += "<tr>"
+      resText += "<td bgcolor=\"" + rgb2code(Rval[i],Gval[i],Bval[i]) + "\" width=\"40\">" + "　</td>";
+      resText += "<td class=\"kaki\">" + kaki[i] + "</td>";
+      resText += "<td class=\"yomi\">" + yomi[i] + "</td>";
+      resText += "<td class=\"rgbv\">" + Rval[i] + "</td>";
+      resText += "<td class=\"rgbv\">" + Gval[i] + "</td>";
+      resText += "<td class=\"rgbv\">" + Bval[i] + "</td>";
+      resText += "<td class=\"codev\">" + rgb2code(Rval[i],Gval[i],Bval[i]) + "</td>";
+      resText += "</tr>";
+    }
+  }
+  resText += "</table>";
+  YAHOO.util.Dom.get("oto_result").innerHTML = resText;
+}
+
+function rgb2code(r,g,b)
+{
+	var code = "#";
+	if(r<16) {
+		code += '0' + r.toString(16);
+	} else {
+		code += r.toString(16);
+	}
+	if(g<16) {
+		code += '0' + g.toString(16);
+	} else {
+		code += g.toString(16);
+	}
+	if(b<16) {
+		code += '0' + b.toString(16);
+	} else {
+		code += b.toString(16);
+	}
+	return code;
+}
+-->
+</script>
+
 </head>
 <body>
 <h1>色の名前辞書計画</h1>
-　このWebサイトは「日本に存在する色の名前を全て網羅する」ことを目的として作成されました。
+　このWebサイトは「日本に存在する色の名前を全て網羅する」ことを目的として作成されました。<br />
+　2024年12月9日現在　収録名前数　11,404種類<br />
 <hr>
 <div class="home">
-2024年12月9日現在　収録名前数　11,404種類
-<br />
 <br />
 <div class="tabs">
   <input id="ototable" type="radio" name="tab_item" checked>
-  <label class="tab_item" for="ototable">５０音表</label>
+  <label class="tab_item" for="ototable" onclick="dispOto()">５０音表</label>
   <input id="kinji" type="radio" name="tab_item">
   <label class="tab_item" for="kinji">近似色検索</label>
   <input id="search" type="radio" name="tab_item">
   <label class="tab_item" for="search">色名検索</label>
+  
   <div class="tab_content" id="ototable_content">
     <div class="tab_content_description">
-      <table class="oto" cellpadding="12">
-        <tr>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=わ&i_seah=^わ">わ</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=ら&i_seah=^ら">ら</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=や&i_seah=^や">や</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=ま&i_seah=^ま">ま</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=は&i_seah=^は|^ば|^ぱ">は</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=な&i_seah=^な">な</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=た&i_seah=^た|^だ">た</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=さ&i_seah=^さ|^ざ">さ</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=か&i_seah=^か|^が">か</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=あ&i_seah=^あ">あ</a></td>
-        </tr>
-        <tr>
-        <td>　</td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=り&i_seah=^り">り</a></td>
-        <td>　</td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=み&i_seah=^み">み</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=ひ&i_seah=^ひ|^び|^ぴ">ひ</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=に&i_seah=^に">に</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=ち&i_seah=^ち|^ぢ">ち</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=し&i_seah=^し|^じ">し</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=き&i_seah=^き|^ぎ">き</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=い&i_seah=^い">い</a></td>
-        </tr>
-        <tr>
-        <td>　</td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=る&i_seah=^る">る</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=ゆ&i_seah=^ゆ">ゆ</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=む&i_seah=^む">む</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=ふ&i_seah=^ふ|^ぶ|^ぷ">ふ</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=ぬ&i_seah=^ぬ">ぬ</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=つ&i_seah=^つ|^づ">つ</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=す&i_seah=^す|^ず">す</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=く&i_seah=^く|^ぐ">く</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=う&i_seah=^う">う</a></td>
-        </tr>
-        <tr>
-        <td>　</td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=れ&i_seah=^れ">れ</a></td>
-        <td>　</td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=め&i_seah=^め">め</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=へ&i_seah=^へ|^べ|^ぺ">へ</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=ね&i_seah=^ね">ね</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=て&i_seah=^て|^で">て</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=せ&i_seah=^せ|^ぜ">せ</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=け&i_seah=^け|^げ">け</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=え&i_seah=^え">え</a></td>
-        </tr>
-        <tr>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=を&i_seah=^を">を</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=ろ&i_seah=^ろ">ろ</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=よ&i_seah=^よ">よ</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=も&i_seah=^も">も</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=ほ&i_seah=^ほ|^ぼ|^ぽ">ほ</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=の&i_seah=^の">の</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=と&i_seah=^と|^ど">と</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=そ&i_seah=^そ|^ぞ">そ</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=こ&i_seah=^こ|^ご">こ</a></td>
-        <td><a href="http://hpcgi1.nifty.com/ume20/c_50on.cgi?i_head=お&i_seah=^お">お</a></td>
-        </tr>
-        </table>
-            </div>
+      <DIV id="oto_result"></DIV>
+    </div>
   </div>
+  
   <div class="tab_content" id="kinji_content">
     <div class="tab_content_description">
       <table>

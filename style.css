@@ -25,24 +25,10 @@ h2 {
     color: #404000;
 }
 div.home {
-    /* text-align: center; */
     margin-top: 2ex;
     margin-left: 4ex;
     margin-bottom: 2ex;
     line-height: 1.5;
-}
-table.oto {
-    margin-left: 4ex;
-    width: 700px;
-    border-collapse: separate;
-    empty-cells: hide;
-}
-td {
-    border-bottom: #b0b090 1px solid;
-    border-left: #ffffff 1px solid;
-    border-right: #b0b090 1px solid;
-    border-top: #ffffff 1px solid;
-    color: #001030
 }
 td.kaki {
     width: 30%;
@@ -59,6 +45,22 @@ td.yomi {
     border-right: #b0b090 1px solid;
     border-top: #ffffff 1px solid;
     color: #001030
+}
+td.rgbv {
+    border-bottom: #b0b090 1px solid;
+    border-left: #ffffff 1px solid;
+    border-right: #b0b090 1px solid;
+    border-top: #ffffff 1px solid;
+    color: #001030;
+    text-align: center;
+}
+td.codev {
+    border-bottom: #b0b090 1px solid;
+    border-left: #ffffff 1px solid;
+    border-right: #b0b090 1px solid;
+    border-top: #ffffff 1px solid;
+    color: #001030;
+    text-align: left;
 }
 td.gosa {
     width: 7ex;
