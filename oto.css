@@ -3,7 +3,41 @@ table.oto {
     border-collapse: separate;
     empty-cells: hide;
 }
+
 td.oto {
+    border-bottom: #b0b090 1px solid;
+    border-left: #ffffff 1px solid;
+    border-right: #b0b090 1px solid;
+    border-top: #ffffff 1px solid;
+    color: #001030;
+    text-align: center;
+    vertical-align: middle;
+}
+
+td.navi_setgyou {
+    width: 150px;
+    border-bottom: #b0b090 1px solid;
+    border-left: #ffffff 1px solid;
+    border-right: #b0b090 1px solid;
+    border-top: #ffffff 1px solid;
+    color: #001030;
+    text-align: left;
+    vertical-align: middle;
+}
+
+td.navi_dispgyou {
+    width: 200px;
+    border-bottom: #b0b090 1px solid;
+    border-left: #ffffff 1px solid;
+    border-right: #b0b090 1px solid;
+    border-top: #ffffff 1px solid;
+    color: #001030;
+    text-align: left;
+    vertical-align: middle;
+}
+
+td.navi_button {
+    width: 50px;
     border-bottom: #b0b090 1px solid;
     border-left: #ffffff 1px solid;
     border-right: #b0b090 1px solid;
