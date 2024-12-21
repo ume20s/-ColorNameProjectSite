@@ -94,22 +94,22 @@ function otoClick(sMidasi, sRex)
   resText += "<tr>";
   resText += "<th>色</th>";
   resText += "<th>名称</th>";
-  resText += "<th class=\"oto\">めいしょう</th>";
-  resText += "<th class=\"oto\">R</th>";
-  resText += "<th class=\"oto\">G</th>";
-  resText += "<th class=\"oto\">B</th>";
-  resText += "<th class=\"oto\">#code</th>";
+  resText += "<th>めいしょう</th>";
+  resText += "<th>R</th>";
+  resText += "<th>G</th>";
+  resText += "<th>B</th>";
+  resText += "<th>#code</th>";
   resText += "</tr>";
   for(i=0; i<num; i++) {
     if(yomi[i].search(sRex)==0) {
       resText += "<tr>"
       resText += "<td bgcolor=\"" + rgb2code(Rval[i],Gval[i],Bval[i]) + "\" width=\"40\">" + "　</td>";
-      resText += "<td class=\"kaki\">" + kaki[i] + "</td>";
-      resText += "<td class=\"yomi\">" + yomi[i] + "</td>";
-      resText += "<td class=\"rgbv\">" + Rval[i] + "</td>";
-      resText += "<td class=\"rgbv\">" + Gval[i] + "</td>";
-      resText += "<td class=\"rgbv\">" + Bval[i] + "</td>";
-      resText += "<td class=\"codev\">" + rgb2code(Rval[i],Gval[i],Bval[i]) + "</td>";
+      resText += "<td>" + kaki[i] + "</td>";
+      resText += "<td>" + yomi[i] + "</td>";
+      resText += "<td class=\"rgb\">" + Rval[i] + "</td>";
+      resText += "<td class=\"rgb\">" + Gval[i] + "</td>";
+      resText += "<td class=\"rgb\">" + Bval[i] + "</td>";
+      resText += "<td>" + rgb2code(Rval[i],Gval[i],Bval[i]) + "</td>";
       resText += "</tr>";
     }
   }

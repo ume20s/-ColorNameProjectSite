@@ -1,48 +1,65 @@
+/* 汎用 */
 table.oto {
     width: 640px;
     border-collapse: separate;
     empty-cells: hide;
 }
 
-td.oto {
+th {
     border-bottom: #b0b090 1px solid;
     border-left: #ffffff 1px solid;
     border-right: #b0b090 1px solid;
     border-top: #ffffff 1px solid;
+    background-color: #e8e8e8;
     color: #001030;
     text-align: center;
     vertical-align: middle;
 }
 
-td.navi_setgyou {
-    width: 150px;
+td {
+    padding: 1px 4px;
+    font-family: 'Fira Sans', Consolas, monospace;
     border-bottom: #b0b090 1px solid;
     border-left: #ffffff 1px solid;
     border-right: #b0b090 1px solid;
     border-top: #ffffff 1px solid;
     color: #001030;
+}
+
+/* 50音テーブル */
+td.oto {
+    padding: 15px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* ナビゲーションバー */
+td.navi_setgyou {
+    padding: 5px 2px;
+    width: 150px;
     text-align: left;
     vertical-align: middle;
 }
 
 td.navi_dispgyou {
     width: 200px;
-    border-bottom: #b0b090 1px solid;
-    border-left: #ffffff 1px solid;
-    border-right: #b0b090 1px solid;
-    border-top: #ffffff 1px solid;
-    color: #001030;
     text-align: left;
     vertical-align: middle;
 }
 
 td.navi_button {
     width: 50px;
-    border-bottom: #b0b090 1px solid;
-    border-left: #ffffff 1px solid;
-    border-right: #b0b090 1px solid;
-    border-top: #ffffff 1px solid;
-    color: #001030;
     text-align: center;
     vertical-align: middle;
+}
+
+/* 結果表示 */
+td.rgb {
+    text-align: right;
+}
+
+td.gosa {
+    width: 7ex;
+    text-align: right;
+    color: #001030
 }
