@@ -1,6 +1,7 @@
 var otoText;
 var rowsPerPage, currentPage;
 var otoStart, otoEnd;
+var otoMidasi;
 
 function disp50Oto()
 {
@@ -78,15 +79,10 @@ function otoClick(sMidasi, sRex)
   // １ページ表示数と表示ページの初期化
   rowsPerPage = 15;
   currentPage = 1;
-  otoStart = rowsPerPage * (currentPage-1);
-  if(otoNum < rowsPerPage * currentPage) {
-    otoEnd = otoNum;
-  } else {
-    otoEnd = rowsPerPage * currentPage;
-  }
 
   // 結果表示
-  dispOto(sMidasi);
+  otoMidasi = sMidasi;
+  dispOto();
 }
 
 function searchOto(sRex)
@@ -104,13 +100,21 @@ function searchOto(sRex)
   }
 }
 
-function dispOto(sMidasi)
+function dispOto()
 {
   // タイトル
-  otoText = "<h1>" + sMidasi + "で始まる色の名前" + "</h1><br />";
+  otoText = "<h1>" + otoMidasi + "で始まる色の名前" + "</h1><br />";
   otoText += "<form>";
   otoText += "<table>";
   otoText += "<tr>";
+
+  // 表示ページの計算
+  otoStart = rowsPerPage * (currentPage-1);
+  if(otoNum < rowsPerPage * currentPage) {
+    otoEnd = otoNum;
+  } else {
+    otoEnd = rowsPerPage * currentPage;
+  }
 
   // ナビゲーションバー
   otoText += "<td class=\"navi_setgyou\">";
@@ -123,10 +127,10 @@ function dispOto(sMidasi)
   otoText += "</td>";
   otoText += "<td class=\"navi_dispgyou\">";
   otoText += otoNum + "件中" + (otoStart+1) + "～" + otoEnd + "件を表示</td>";
-  otoText += "<td class=\"navi_button\">｜＜</td>";
-  otoText += "<td class=\"navi_button\">＜</td>";
-  otoText += "<td class=\"navi_button\">＞</td>";
-  otoText += "<td class=\"navi_button\">＞｜</td>";
+  otoText += "<td class=\"navi_button\" onclick=\"otoNaviStart()\">｜＜</td>";
+  otoText += "<td class=\"navi_button\" onclick=\"otoNaviDec()\">＜</td>";
+  otoText += "<td class=\"navi_button\" onclick=\"otoNaviInc()\">＞</td>";
+  otoText += "<td class=\"navi_button\" onclick=\"otoNaviEnd()\">＞｜</td>";
   otoText += "</tr>";
   otoText += "</table>";
   otoText += "</form>";
@@ -157,9 +161,31 @@ function dispOto(sMidasi)
   YAHOO.util.Dom.get("oto_result").innerHTML = otoText;
 }
 
-function otoNaviInc()
-{  
-
-  
+// ナビゲーションバー操作
+function otoNaviStart()
+{
+  currentPage = 1;
+  dispOto();
 }
 
+function otoNaviDec()
+{
+  if(currentPage > 1) {
+    currentPage--;
+    dispOto();
+  }
+}
+
+function otoNaviInc()
+{
+  if(otoNum > currentPage * rowsPerPage) {
+    currentPage++;
+    dispOto();
+  }
+}
+
+function otoNaviEnd()
+{
+  currentPage = Math.floor(otoNum / rowsPerPage) + 1;
+  dispOto();
+}
