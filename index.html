@@ -15,16 +15,37 @@
 
 <script type="text/javascript"><!--
 
+var fullNum;
 var fullYomi,fullKaki
 var fullRval,fullGval,fullBval;
-var fullNum;
 
-// ロード時にファイル読み込み
-window.onload = function () {
-  dispOto();
+var otoNum;
+var otoYomi,otoKaki;
+var otoRval,otoGval,otoBval;
+
+// ロード時に変数の準備とファイル読み込み
+window.onload = function ()
+{
+  // 全データ配列
+	fullYomi = new Array(12000);
+	fullKaki = new Array(12000);
+	fullRval = new Array(12000);
+	fullGval = new Array(12000);
+	fullBval = new Array(12000);
+
+  // 50音別配列
+	otoYomi = new Array(5000);
+	otoKaki = new Array(5000);
+	otoRval = new Array(5000);
+	otoGval = new Array(5000);
+	otoBval = new Array(5000);
+
+  // まずは50音表を表示
+  disp50Oto();
 }
 
-window.addEventListener('DOMContentLoaded', function(){
+window.addEventListener('DOMContentLoaded', function()
+{
   const xhr = new XMLHttpRequest();
   xhr.open('get', './c_name.txt');
   xhr.send();
@@ -37,12 +58,6 @@ window.addEventListener('DOMContentLoaded', function(){
 
 function readColorData(tabText)
 {
-	fullYomi = new Array(12000);
-	fullKaki = new Array(12000);
-	fullRval = new Array(12000);
-	fullGval = new Array(12000);
-	fullBval = new Array(12000);
-
 	var LF = String.fromCharCode(10); // 改行コード (LF)
 	var TAB = String.fromCharCode(9); // タブコード
 	lineData = tabText.split(LF);
@@ -90,7 +105,7 @@ function rgb2code(r,g,b)
 <br />
 <div class="tabs">
   <input id="ototable" type="radio" name="tab_item" checked>
-  <label class="tab_item" for="ototable" onclick="dispOto()">５０音表</label>
+  <label class="tab_item" for="ototable" onclick="disp50Oto()">５０音表</label>
   <input id="kinji" type="radio" name="tab_item">
   <label class="tab_item" for="kinji">近似色検索</label>
   <input id="search" type="radio" name="tab_item">
