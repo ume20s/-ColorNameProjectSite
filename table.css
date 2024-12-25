@@ -36,13 +36,13 @@ td.oto {
 /* ナビゲーションバー */
 td.navi_setgyou {
     padding: 5px 2px;
-    width: 150px;
+    width: 180px;
     text-align: left;
     vertical-align: middle;
 }
 
 td.navi_dispgyou {
-    width: 200px;
+    width: 500px;
     text-align: left;
     vertical-align: middle;
 }

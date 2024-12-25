@@ -2,6 +2,7 @@ var otoText;
 var rowsPerPage, currentPage;
 var otoStart, otoEnd;
 var otoMidasi;
+var rowsSelect;
 
 function disp50Oto()
 {
@@ -71,6 +72,7 @@ function disp50Oto()
   YAHOO.util.Dom.get("oto_result").innerHTML = otoText;
 }
 
+// 50音表で文字を選択したとき
 function otoClick(sMidasi, sRex)
 {
   // 先頭文字で正規表現検索
@@ -83,8 +85,13 @@ function otoClick(sMidasi, sRex)
   // 結果表示
   otoMidasi = sMidasi;
   dispOto();
+
+  // ドロップダウンメニューの変更イベントを取得
+  rowsSelect = document.getElementById('rows');
+  rowsSelect.addEventListener('change', rowsPerPageChange);
 }
 
+// 見出し文字の正規表現で検索
 function searchOto(sRex)
 {
   otoNum = 0;
@@ -100,6 +107,7 @@ function searchOto(sRex)
   }
 }
 
+// 音に対応した色名表示本体
 function dispOto()
 {
   // タイトル
@@ -108,6 +116,32 @@ function dispOto()
   otoText += "<table>";
   otoText += "<tr>";
 
+  // ナビゲーションバー
+  otoText += "<td class=\"navi_setgyou\">";
+  otoText += "1ページ件数：";
+  otoText += "<select id=\"rows\">";
+  otoText += "<option value=\"15\">15</option>";
+  otoText += "<option value=\"30\">30</option>";
+  otoText += "<option value=\"50\">50</option>";
+  otoText += "<option value=\"100\">100</option>";
+  otoText += "</select>";
+  otoText += "</td>";
+  otoText += "<td class=\"navi_button\" onclick=\"otoNaviStart()\">｜＜</td>";
+  otoText += "<td class=\"navi_button\" onclick=\"otoNaviDec()\">＜</td>";
+  otoText += "<td class=\"navi_button\" onclick=\"otoNaviInc()\">＞</td>";
+  otoText += "<td class=\"navi_button\" onclick=\"otoNaviEnd()\">＞｜</td>";
+  otoText += "</tr>";
+  otoText += "</table>";
+  otoText += "</form>";
+  otoText += "<DIV id=\"otopage_result\"></DIV>";
+
+  YAHOO.util.Dom.get("oto_result").innerHTML = otoText;
+  dispOtoPage();
+}
+
+// 音ページ表示
+function dispOtoPage()
+{
   // 表示ページの計算
   otoStart = rowsPerPage * (currentPage-1);
   if(otoNum < rowsPerPage * currentPage) {
@@ -116,26 +150,16 @@ function dispOto()
     otoEnd = rowsPerPage * currentPage;
   }
 
-  // ナビゲーションバー
-  otoText += "<td class=\"navi_setgyou\">";
-  otoText += "行を表示：";
-  otoText += "<select name=\"example\">";
-  otoText += "<option>15</option>";
-  otoText += "<option>30</option>";
-  otoText += "<option>50</option>";
-  otoText += "</select>";
-  otoText += "</td>";
+  // 現在表示しているページ数の表示
+  otoText = "<table>";
+  otoText += "<tr>";
   otoText += "<td class=\"navi_dispgyou\">";
+  otoText += "ページ:" + currentPage + "/" + (Math.floor(otoNum / rowsPerPage)+1) + "　件数:";
   otoText += otoNum + "件中" + (otoStart+1) + "～" + otoEnd + "件を表示</td>";
-  otoText += "<td class=\"navi_button\" onclick=\"otoNaviStart()\">｜＜</td>";
-  otoText += "<td class=\"navi_button\" onclick=\"otoNaviDec()\">＜</td>";
-  otoText += "<td class=\"navi_button\" onclick=\"otoNaviInc()\">＞</td>";
-  otoText += "<td class=\"navi_button\" onclick=\"otoNaviEnd()\">＞｜</td>";
   otoText += "</tr>";
-  otoText += "</table>";
-  otoText += "</form>";
-
-  // 音に対応した色名表示
+  otoText += "</table><br />";
+  
+  // 色データ表示
   otoText += "<table>";
   otoText += "<tr>";
   otoText += "<th>色</th>";
@@ -158,21 +182,22 @@ function dispOto()
     otoText += "</tr>";
   }
   otoText += "</table><br />";
-  YAHOO.util.Dom.get("oto_result").innerHTML = otoText;
+
+  YAHOO.util.Dom.get("otopage_result").innerHTML = otoText;
 }
 
 // ナビゲーションバー操作
 function otoNaviStart()
 {
   currentPage = 1;
-  dispOto();
+  dispOtoPage();
 }
 
 function otoNaviDec()
 {
   if(currentPage > 1) {
     currentPage--;
-    dispOto();
+    dispOtoPage();
   }
 }
 
@@ -180,12 +205,19 @@ function otoNaviInc()
 {
   if(otoNum > currentPage * rowsPerPage) {
     currentPage++;
-    dispOto();
+    dispOtoPage();
   }
 }
 
 function otoNaviEnd()
 {
   currentPage = Math.floor(otoNum / rowsPerPage) + 1;
-  dispOto();
+  dispOtoPage();
+}
+
+// ナビゲーションバーの１ページ行数を操作した時
+function rowsPerPageChange(){
+  rowsPerPage = rowsSelect.value;
+  currentPage = Math.floor(otoStart / rowsPerPage) + 1;
+  dispOtoPage();
 }
