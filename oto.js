@@ -154,7 +154,7 @@ function dispOtoPage()
   otoText = "<table>";
   otoText += "<tr>";
   otoText += "<td class=\"navi_dispgyou\">";
-  otoText += "ページ:" + currentPage + "/" + (Math.floor(otoNum / rowsPerPage)+1) + "　件数:";
+  otoText += "ページ:" + currentPage + "/" + (Math.floor((otoNum-1) / rowsPerPage) + 1) + "　件数:";
   otoText += otoNum + "件中" + (otoStart+1) + "～" + otoEnd + "件を表示</td>";
   otoText += "</tr>";
   otoText += "</table><br />";
@@ -211,7 +211,7 @@ function otoNaviInc()
 
 function otoNaviEnd()
 {
-  currentPage = Math.floor(otoNum / rowsPerPage) + 1;
+  currentPage = Math.floor((otoNum-1) / rowsPerPage) + 1;
   dispOtoPage();
 }
 
