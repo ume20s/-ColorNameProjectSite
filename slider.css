@@ -5,14 +5,14 @@ input.rangeRed {
   height: 20px;
   border: 1px solid #333333;
   border-radius: 2px;
-  background: linear-gradient(90deg, #ffaacc 50%, #ffd3ec 50%);
+  background: linear-gradient(90deg, #ffdddd 0% 50%, #f0f0f0 50% 100%);
   cursor: pointer;
 }
 /* ツマミ：Chrome, Safari, Edge用 */
 input.rangeRed::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 24px;
+  width: 12px;
   height: 24px;
   border: 2px solid #333333;
   border-radius: 2px;
@@ -21,7 +21,7 @@ input.rangeRed::-webkit-slider-thumb {
 }
 /* ツマミ：Firefox用 */
 input.rangeRed::-moz-range-thumb {
-  width: 24px;
+  width: 12px;
   height: 24px;
   border: 2px solid #333333;
   border-radius: 2px;
@@ -36,14 +36,14 @@ input.rangeGreen {
   height: 20px;
   border: 1px solid #333333;
   border-radius: 2px;
-  background: linear-gradient(90deg, #44ff99 50%, #d3ffec 50%);
+  background: linear-gradient(90deg, #ddffdd 0% 50%, #f0f0f0 50% 100%);
   cursor: pointer;
 }
 /* ツマミ：Chrome, Safari, Edge用 */
 input.rangeGreen::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 24px;
+  width: 12px;
   height: 24px;
   border: 2px solid #333333;
   border-radius: 2px;
@@ -52,7 +52,7 @@ input.rangeGreen::-webkit-slider-thumb {
 }
 /* ツマミ：Firefox用 */
 input.rangeGreen::-moz-range-thumb {
-  width: 24px;
+  width: 12px;
   height: 24px;
   border: 2px solid #333333;
   border-radius: 2px;
@@ -67,14 +67,14 @@ input.rangeBlue {
   height: 20px;
   border: 1px solid #333333;
   border-radius: 2px;
-  background: linear-gradient(90deg, #aaccff 50%, #d3ecff 50%);
+  background: linear-gradient(90deg, #ddddff 0% 50%, #f0f0f0 50% 100%);
   cursor: pointer;
 }
 /* ツマミ：Chrome, Safari, Edge用 */
 input.rangeBlue::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 24px;
+  width: 12px;
   height: 24px;
   border: 2px solid #333333;
   border-radius: 2px;
@@ -83,10 +83,50 @@ input.rangeBlue::-webkit-slider-thumb {
 }
 /* ツマミ：Firefox用 */
 input.rangeBlue::-moz-range-thumb {
-  width: 24px;
+  width: 12px;
   height: 24px;
   border: 2px solid #333333;
   border-radius: 2px;
   background: #0000ff;
   box-shadow: none;
+}
+
+/* スライダーバー誤差 */
+input.rangeGosa {
+  appearance: none;
+  width: 140px;
+  height: 20px;
+  border: 1px solid #333333;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #dddddd 0% 40%, #f0f0f0 40% 100%);
+  cursor: pointer;
+}
+/* ツマミ：Chrome, Safari, Edge用 */
+input.rangeGosa::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 24px;
+  border: 2px solid #333333;
+  border-radius: 2px;
+  background: #404040;
+  box-shadow: none;
+}
+/* ツマミ：Firefox用 */
+input.rangeGosa::-moz-range-thumb {
+  width: 12px;
+  height: 24px;
+  border: 2px solid #333333;
+  border-radius: 2px;
+  background: #303030;
+  box-shadow: none;
+}
+
+#panel {
+	width:72px;
+	height:72px;
+  border-bottom: #808080 1px solid;
+  border-left: #ffffff 1px solid;
+  border-right: #808080 1px solid;
+  border-top: #ffffff 1px solid;
 }

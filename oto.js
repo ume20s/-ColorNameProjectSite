@@ -94,15 +94,15 @@ function otoClick(sMidasi, sRex)
 // 見出し文字の正規表現で検索
 function searchOto(sRex)
 {
-  otoNum = 0;
+  kekkaNum = 0;
   for(var i=0; i<fullNum; i++) {
     if(fullYomi[i].search(sRex)==0) {
-      otoYomi[otoNum] = fullYomi[i];
-      otoKaki[otoNum] = fullKaki[i];
-      otoRval[otoNum] = fullRval[i];
-      otoGval[otoNum] = fullGval[i];
-      otoBval[otoNum] = fullBval[i];
-      otoNum++;
+      kekkaYomi[kekkaNum] = fullYomi[i];
+      kekkaKaki[kekkaNum] = fullKaki[i];
+      kekkaRval[kekkaNum] = fullRval[i];
+      kekkaGval[kekkaNum] = fullGval[i];
+      kekkaBval[kekkaNum] = fullBval[i];
+      kekkaNum++;
     }
   }
 }
@@ -144,8 +144,8 @@ function dispOtoPage()
 {
   // 表示ページの計算
   otoStart = rowsPerPage * (currentPage-1);
-  if(otoNum < rowsPerPage * currentPage) {
-    otoEnd = otoNum;
+  if(kekkaNum < rowsPerPage * currentPage) {
+    otoEnd = kekkaNum;
   } else {
     otoEnd = rowsPerPage * currentPage;
   }
@@ -154,8 +154,8 @@ function dispOtoPage()
   otoText = "<table>";
   otoText += "<tr>";
   otoText += "<td class=\"navi_dispgyou\">";
-  otoText += "ページ:" + currentPage + "/" + (Math.floor((otoNum-1) / rowsPerPage) + 1) + "　件数:";
-  otoText += otoNum + "件中" + (otoStart+1) + "～" + otoEnd + "件を表示</td>";
+  otoText += "ページ:" + currentPage + "/" + (Math.floor((kekkaNum-1) / rowsPerPage) + 1) + "　件数:";
+  otoText += kekkaNum + "件中" + (otoStart+1) + "～" + otoEnd + "件を表示</td>";
   otoText += "</tr>";
   otoText += "</table><br />";
   
@@ -172,13 +172,13 @@ function dispOtoPage()
   otoText += "</tr>";
   for(var i=otoStart; i<otoEnd; i++) {
     otoText += "<tr>"
-    otoText += "<td bgcolor=\"" + rgb2code(otoRval[i],otoGval[i],otoBval[i]) + "\" width=\"40\">" + "　</td>";
-    otoText += "<td>" + otoKaki[i] + "</td>";
-    otoText += "<td>" + otoYomi[i] + "</td>";
-    otoText += "<td class=\"rgb\">" + otoRval[i] + "</td>";
-    otoText += "<td class=\"rgb\">" + otoGval[i] + "</td>";
-    otoText += "<td class=\"rgb\">" + otoBval[i] + "</td>";
-    otoText += "<td>" + rgb2code(otoRval[i],otoGval[i],otoBval[i]) + "</td>";
+    otoText += "<td bgcolor=\"" + rgb2code(kekkaRval[i],kekkaGval[i],kekkaBval[i]) + "\" width=\"40\">" + "　</td>";
+    otoText += "<td>" + kekkaKaki[i] + "</td>";
+    otoText += "<td>" + kekkaYomi[i] + "</td>";
+    otoText += "<td class=\"rgb\">" + kekkaRval[i] + "</td>";
+    otoText += "<td class=\"rgb\">" + kekkaGval[i] + "</td>";
+    otoText += "<td class=\"rgb\">" + kekkaBval[i] + "</td>";
+    otoText += "<td>" + rgb2code(kekkaRval[i],kekkaGval[i],kekkaBval[i]) + "</td>";
     otoText += "</tr>";
   }
   otoText += "</table><br />";
@@ -203,7 +203,7 @@ function otoNaviDec()
 
 function otoNaviInc()
 {
-  if(otoNum > currentPage * rowsPerPage) {
+  if(kekkaNum > currentPage * rowsPerPage) {
     currentPage++;
     dispOtoPage();
   }
@@ -211,7 +211,7 @@ function otoNaviInc()
 
 function otoNaviEnd()
 {
-  currentPage = Math.floor((otoNum-1) / rowsPerPage) + 1;
+  currentPage = Math.floor((kekkaNum-1) / rowsPerPage) + 1;
   dispOtoPage();
 }
 
