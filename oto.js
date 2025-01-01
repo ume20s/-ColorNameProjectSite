@@ -1,8 +1,8 @@
 var otoText;
-var rowsPerPage, currentPage;
+var otoRowsPerPage, otoCurrentPage;
 var otoStart, otoEnd;
 var otoMidasi;
-var rowsSelect;
+var otoRowsSelect;
 
 function disp50Oto()
 {
@@ -79,16 +79,16 @@ function otoClick(sMidasi, sRex)
   searchOto(sRex);
 
   // １ページ表示数と表示ページの初期化
-  rowsPerPage = 15;
-  currentPage = 1;
+  otoRowsPerPage = 15;
+  otoCurrentPage = 1;
 
   // 結果表示
   otoMidasi = sMidasi;
   dispOto();
 
   // ドロップダウンメニューの変更イベントを取得
-  rowsSelect = document.getElementById('rows');
-  rowsSelect.addEventListener('change', rowsPerPageChange);
+  otoRowsSelect = document.getElementById('oto_rows');
+  otoRowsSelect.addEventListener('change', otoRowsPerPageChange);
 }
 
 // 見出し文字の正規表現で検索
@@ -112,14 +112,14 @@ function dispOto()
 {
   // タイトル
   otoText = "<h1>" + otoMidasi + "で始まる色の名前" + "</h1><br />";
+
+  // ナビゲーションバー
   otoText += "<form>";
   otoText += "<table>";
   otoText += "<tr>";
-
-  // ナビゲーションバー
   otoText += "<td class=\"navi_setgyou\">";
   otoText += "1ページ件数：";
-  otoText += "<select id=\"rows\">";
+  otoText += "<select id=\"oto_rows\">";
   otoText += "<option value=\"15\">15</option>";
   otoText += "<option value=\"30\">30</option>";
   otoText += "<option value=\"50\">50</option>";
@@ -143,18 +143,18 @@ function dispOto()
 function dispOtoPage()
 {
   // 表示ページの計算
-  otoStart = rowsPerPage * (currentPage-1);
-  if(kekkaNum < rowsPerPage * currentPage) {
+  otoStart = otoRowsPerPage * (otoCurrentPage-1);
+  if(kekkaNum < otoRowsPerPage * otoCurrentPage) {
     otoEnd = kekkaNum;
   } else {
-    otoEnd = rowsPerPage * currentPage;
+    otoEnd = otoRowsPerPage * otoCurrentPage;
   }
 
   // 現在表示しているページ数の表示
   otoText = "<table>";
   otoText += "<tr>";
   otoText += "<td class=\"navi_dispgyou\">";
-  otoText += "ページ:" + currentPage + "/" + (Math.floor((kekkaNum-1) / rowsPerPage) + 1) + "　件数:";
+  otoText += "ページ:" + otoCurrentPage + "/" + (Math.floor((kekkaNum-1) / otoRowsPerPage) + 1) + "　件数:";
   otoText += kekkaNum + "件中" + (otoStart+1) + "～" + otoEnd + "件を表示</td>";
   otoText += "</tr>";
   otoText += "</table><br />";
@@ -189,35 +189,35 @@ function dispOtoPage()
 // ナビゲーションバー操作
 function otoNaviStart()
 {
-  currentPage = 1;
+  otoCurrentPage = 1;
   dispOtoPage();
 }
 
 function otoNaviDec()
 {
-  if(currentPage > 1) {
-    currentPage--;
+  if(otoCurrentPage > 1) {
+    otoCurrentPage--;
     dispOtoPage();
   }
 }
 
 function otoNaviInc()
 {
-  if(kekkaNum > currentPage * rowsPerPage) {
-    currentPage++;
+  if(kekkaNum > otoCurrentPage * otoRowsPerPage) {
+    otoCurrentPage++;
     dispOtoPage();
   }
 }
 
 function otoNaviEnd()
 {
-  currentPage = Math.floor((kekkaNum-1) / rowsPerPage) + 1;
+  otoCurrentPage = Math.floor((kekkaNum-1) / otoRowsPerPage) + 1;
   dispOtoPage();
 }
 
 // ナビゲーションバーの１ページ行数を操作した時
-function rowsPerPageChange(){
-  rowsPerPage = rowsSelect.value;
-  currentPage = Math.floor(otoStart / rowsPerPage) + 1;
+function otoRowsPerPageChange(){
+  otoRowsPerPage = otoRowsSelect.value;
+  otoCurrentPage = Math.floor(otoStart / otoRowsPerPage) + 1;
   dispOtoPage();
 }
