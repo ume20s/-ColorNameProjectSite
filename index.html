@@ -16,30 +16,42 @@
 
 <script type="text/javascript"><!--
 
+const YOMI = 0;
+const KAKI = 1;
+const RVAL = 2;
+const GVAL = 3;
+const BVAL = 4;
+const KINJI = 5;
+
 var fullNum;
-var fullYomi,fullKaki
-var fullRval,fullGval,fullBval;
+var full = [];
 
 var kekkaNum;
-var kekkaYomi,kekkaKaki;
-var kekkaRval,kekkaGval,kekkaBval;
+var kekka = [];
 
 // ロード時に変数の準備とファイル読み込み
 window.onload = function ()
 {
   // 全データ配列
-	fullYomi = new Array(12000);
-	fullKaki = new Array(12000);
-	fullRval = new Array(12000);
-	fullGval = new Array(12000);
-	fullBval = new Array(12000);
+  for(var i=0; i<12000; i++) {
+    full[i] = [];
+    full[i][YOMI] = ""; // 読み
+    full[i][KAKI] = ""; // 書き
+    full[i][RVAL] = 0;  // 赤
+    full[i][GVAL] = 0;  // 緑
+    full[i][BVAL] = 0;  // 青
+  }
 
   // 検索結果配列
-	kekkaYomi = new Array(5000);
-	kekkaKaki = new Array(5000);
-	kekkaRval = new Array(5000);
-	kekkaGval = new Array(5000);
-	kekkaBval = new Array(5000);
+  for(var i=0; i<1000; i++){
+    kekka[i] = [];
+    kekka[i][YOMI] = ""; // 読み
+    kekka[i][KAKI] = ""; // 書き
+    kekka[i][RVAL] = 0;  // 赤
+    kekka[i][GVAL] = 0;  // 緑
+    kekka[i][BVAL] = 0;  // 青
+    kekka[i][KINJI] = 0; // 近似％
+  }
 
   // まずは50音表を表示
   disp50Oto();
@@ -66,13 +78,14 @@ function readColorData(tabText)
 	fullNum = lineData.length;
 	for (var i=0; i<fullNum; i++) {
 		wCount = lineData[i].split(TAB);
-		fullYomi[i] = wCount[0];
-		fullKaki[i] = wCount[1];
-		fullRval[i] = parseInt(wCount[2],16);
-		fullGval[i] = parseInt(wCount[3],16);
-		fullBval[i] = parseInt(wCount[4],16);
+		full[i][YOMI] = wCount[0];
+		full[i][KAKI] = wCount[1];
+		full[i][RVAL] = parseInt(wCount[2],16);
+		full[i][GVAL] = parseInt(wCount[3],16);
+		full[i][BVAL] = parseInt(wCount[4],16);
 	}
 }
+console.log(full)
 
 // RGBコード表示文字列に変換
 function rgb2code(r,g,b)

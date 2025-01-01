@@ -96,12 +96,12 @@ function searchOto(sRex)
 {
   kekkaNum = 0;
   for(var i=0; i<fullNum; i++) {
-    if(fullYomi[i].search(sRex)==0) {
-      kekkaYomi[kekkaNum] = fullYomi[i];
-      kekkaKaki[kekkaNum] = fullKaki[i];
-      kekkaRval[kekkaNum] = fullRval[i];
-      kekkaGval[kekkaNum] = fullGval[i];
-      kekkaBval[kekkaNum] = fullBval[i];
+    if(full[i][YOMI].search(sRex)==0) {
+      kekka[kekkaNum][YOMI] = full[i][YOMI];
+      kekka[kekkaNum][KAKI] = full[i][KAKI];
+      kekka[kekkaNum][RVAL] = full[i][RVAL];
+      kekka[kekkaNum][GVAL] = full[i][GVAL];
+      kekka[kekkaNum][BVAL] = full[i][BVAL];
       kekkaNum++;
     }
   }
@@ -172,13 +172,13 @@ function dispOtoPage()
   otoText += "</tr>";
   for(var i=otoStart; i<otoEnd; i++) {
     otoText += "<tr>"
-    otoText += "<td bgcolor=\"" + rgb2code(kekkaRval[i],kekkaGval[i],kekkaBval[i]) + "\" width=\"40\">" + "　</td>";
-    otoText += "<td>" + kekkaKaki[i] + "</td>";
-    otoText += "<td>" + kekkaYomi[i] + "</td>";
-    otoText += "<td class=\"rgb\">" + kekkaRval[i] + "</td>";
-    otoText += "<td class=\"rgb\">" + kekkaGval[i] + "</td>";
-    otoText += "<td class=\"rgb\">" + kekkaBval[i] + "</td>";
-    otoText += "<td>" + rgb2code(kekkaRval[i],kekkaGval[i],kekkaBval[i]) + "</td>";
+    otoText += "<td bgcolor=\"" + rgb2code(kekka[i][RVAL],kekka[i][GVAL],kekka[i][BVAL]) + "\" width=\"40\">" + "　</td>";
+    otoText += "<td>" + kekka[i][KAKI] + "</td>";
+    otoText += "<td>" + kekka[i][YOMI] + "</td>";
+    otoText += "<td class=\"rgb\">" + kekka[i][RVAL] + "</td>";
+    otoText += "<td class=\"rgb\">" + kekka[i][GVAL] + "</td>";
+    otoText += "<td class=\"rgb\">" + kekka[i][BVAL] + "</td>";
+    otoText += "<td>" + rgb2code(kekka[i][RVAL],kekka[i][GVAL],kekka[i][BVAL]) + "</td>";
     otoText += "</tr>";
   }
   otoText += "</table><br />";

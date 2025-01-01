@@ -110,15 +110,16 @@ function searchKinji()
   // 許容誤差以下の色を検索
   kekkaNum = 0;
   for(var i=0; i<fullNum; i++) {
-		gosa = Math.round((Math.abs(sliderRed.value-fullRval[i]) 
-                     + Math.abs(sliderGreen.value-fullGval[i]) 
-                     + Math.abs(sliderBlue.value-fullBval[i])) / 765 * 1000);
+		gosa = Math.round((Math.abs(sliderRed.value-full[i][RVAL]) 
+                     + Math.abs(sliderGreen.value-full[i][GVAL]) 
+                     + Math.abs(sliderBlue.value-full[i][BVAL])) / 765 * 1000);
     if(gosa <= sliderGosa.value) {
-      kekkaYomi[kekkaNum] = fullYomi[i];
-      kekkaKaki[kekkaNum] = fullKaki[i];
-      kekkaRval[kekkaNum] = fullRval[i];
-      kekkaGval[kekkaNum] = fullGval[i];
-      kekkaBval[kekkaNum] = fullBval[i];
+      kekka[kekkaNum][KINJI] = gosa2kinji(gosa);
+      kekka[kekkaNum][YOMI] = full[i][YOMI];
+      kekka[kekkaNum][KAKI] = full[i][KAKI];
+      kekka[kekkaNum][RVAL] = full[i][RVAL];
+      kekka[kekkaNum][GVAL] = full[i][GVAL];
+      kekka[kekkaNum][BVAL] = full[i][BVAL];
       kekkaNum++;
     }
   }
@@ -195,6 +196,7 @@ function dispKinjiPage()
   // 色データ表示
   kinjiText += "<table>";
   kinjiText += "<tr>";
+  kinjiText += "<th>近似％</th>";
   kinjiText += "<th>色</th>";
   kinjiText += "<th>名称</th>";
   kinjiText += "<th>めいしょう</th>";
@@ -203,20 +205,45 @@ function dispKinjiPage()
   kinjiText += "<th>B</th>";
   kinjiText += "<th>#code</th>";
   kinjiText += "</tr>";
-  for(var i=kinjiStart; i<kinjiEnd; i++) {
-    kinjiText += "<tr>"
-    kinjiText += "<td bgcolor=\"" + rgb2code(kekkaRval[i],kekkaGval[i],kekkaBval[i]) + "\" width=\"40\">" + "　</td>";
-    kinjiText += "<td>" + kekkaKaki[i] + "</td>";
-    kinjiText += "<td>" + kekkaYomi[i] + "</td>";
-    kinjiText += "<td class=\"rgb\">" + kekkaRval[i] + "</td>";
-    kinjiText += "<td class=\"rgb\">" + kekkaGval[i] + "</td>";
-    kinjiText += "<td class=\"rgb\">" + kekkaBval[i] + "</td>";
-    kinjiText += "<td>" + rgb2code(kekkaRval[i],kekkaGval[i],kekkaBval[i]) + "</td>";
-    kinjiText += "</tr>";
+  
+  // 検索結果が０件だったらメッセージを表示して終了
+  if(kekkaNum == 0) {
+    kinjiText += "<tr><td></td>";
+    kinjiText += "<td colspan=6>  残念ながら近似色はありませんでした。<br />許容誤差の値を大きくすると良いかもしれません。</td>";
+    kinjiText += "<td></td></tr>";
+  } else {
+    // 検索結果があったら表示
+    for(var i=kinjiStart; i<kinjiEnd; i++) {
+      kinjiText += "<tr>"
+      kinjiText += "<td class=\"rgb\">" + kekka[i][KINJI] + "</td>";
+      kinjiText += "<td bgcolor=\"" + rgb2code(kekka[i][RVAL],kekka[i][GVAL],kekka[i][BVAL]) + "\" width=\"40\">" + "　</td>";
+      kinjiText += "<td>" + kekka[i][KAKI] + "</td>";
+      kinjiText += "<td>" + kekka[i][YOMI] + "</td>";
+      kinjiText += "<td class=\"rgb\">" + kekka[i][RVAL] + "</td>";
+      kinjiText += "<td class=\"rgb\">" + kekka[i][GVAL] + "</td>";
+      kinjiText += "<td class=\"rgb\">" + kekka[i][BVAL] + "</td>";
+      kinjiText += "<td>" + rgb2code(kekka[i][RVAL],kekka[i][GVAL],kekka[i][BVAL]) + "</td>";
+      kinjiText += "</tr>";
+    }
   }
   kinjiText += "</table><br />";
 
   YAHOO.util.Dom.get("kinjipage_result").innerHTML = kinjiText;
+}
+
+// 誤差を近似％文字列に変換
+function gosa2kinji(gosa)
+{
+	var kinji;
+	var kinjiStr;
+	
+	kinji = (1000 - gosa) / 10;
+	if(Math.floor(kinji)==kinji) {
+		kinjiStr = kinji.toString(10) + ".0%";
+	} else {
+		kinjiStr = kinji.toString(10) + "%";
+	}
+	return kinjiStr;
 }
 
 // ナビゲーションバー操作
