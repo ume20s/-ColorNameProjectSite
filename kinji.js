@@ -47,6 +47,7 @@ function kinjiClick()
   sliderBlue.addEventListener('change', searchKinji);
 
   // 初期状態で検索
+  kinjiRowsPerPage = 15;
   searchKinji();
 }
 
@@ -124,7 +125,6 @@ function searchKinji()
 
   // 検索結果表示
   kinjiCurrentPage = 1;
-  kinjiRowsPerPage = 15;
   dispKinji();
 }
 
@@ -138,9 +138,20 @@ function dispKinji()
   kinjiText += "<td class=\"navi_setgyou\">";
   kinjiText += "1ページ件数：";
   kinjiText += "<select id=\"kinji_rows\">";
-  kinjiText += "<option value=\"15\">15</option>";
-  kinjiText += "<option value=\"30\">30</option>";
-  kinjiText += "<option value=\"50\">50</option>";
+  // １ページあたり件数によってselectedの位置を変える
+  if(kinjiRowsPerPage == 15) {
+    kinjiText += "<option value=\"15\" selected>15</option>";
+    kinjiText += "<option value=\"30\">30</option>";
+    kinjiText += "<option value=\"50\">50</option>";
+  } else if(kinjiRowsPerPage == 30) {
+    kinjiText += "<option value=\"15\">15</option>";
+    kinjiText += "<option value=\"30\" selected>30</option>";
+    kinjiText += "<option value=\"50\">50</option>";
+  } else {
+    kinjiText += "<option value=\"15\">15</option>";
+    kinjiText += "<option value=\"30\">30</option>";
+    kinjiText += "<option value=\"50\" selected>50</option>";
+  }
   kinjiText += "</select>";
   kinjiText += "</td>";
   kinjiText += "<td class=\"navi_button\" onclick=\"kinjiNaviStart()\">｜＜</td>";
