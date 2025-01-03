@@ -14,11 +14,22 @@ function namaeClick()
   searchNamaeText = document.getElementById('sNamae');
   searchButton = document.getElementById('namaeSearchButton');
 
-  // 検索ボタンクリックイベントの取得
+  // テキストボックスキー入力イベント
+  searchNamaeText.addEventListener('keydown', namaeKeydown);
+
+  // 検索ボタンクリックイベント
   searchButton.addEventListener('click', searchNamae);
 
   // 初期値の設定
   namaeRowsPerPage = 15;
+}
+
+// テキストボックスでエンターキーが入力されたら検索開始
+function namaeKeydown(event)
+{
+	if(event.key === 'Enter') {
+    searchNamae();
+	}
 }
 
 function searchNamae()
