@@ -33,6 +33,7 @@ function kinjiClick()
   sliderRedInput();
   sliderGreenInput();
   sliderBlueInput();
+  sliderGosaInput();
   dispPanel();
   
   // スライダー操作中イベントの取得
